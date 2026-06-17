@@ -6,15 +6,13 @@
       {
          "label": "Client compile",
          "type": "npm",
-         "script": "client:compile",
+         "script": "client-compile",
          "group": "build",
          "presentation": {
             "panel": "dedicated",
-            "reveal": "never"
+            "reveal": "never",
          },
-         "problemMatcher": [
-            "$tsc"
-         ]
+         "problemMatcher": ["$tsc"],
       },
       {
          "label": "Client watch",
@@ -23,47 +21,15 @@
          "isBackground": true,
          "group": {
             "kind": "build",
-            "isDefault": true
+            "isDefault": true,
          },
          "presentation": {
             "focus": true,
             "panel": "dedicated",
             "reveal": "never",
-            "group": "build"
+            "group": "build",
          },
-         "problemMatcher": [
-            "$tsc-watch"
-         ]
+         "problemMatcher": ["$tsc-watch"],
       },
-      {
-         "label": "Server build",
-         "type": "shell",
-         "isBackground": true,
-         "command": "cargo",
-         "args": [
-            "build"
-         ],
-         "options": {
-            "cwd": "${workspaceFolder}/server"
-         },
-         "group": {
-            "kind": "build",
-            "isDefault": true
-         },
-         "presentation": {
-            "focus": true,
-            "panel": "dedicated",
-            "reveal": "never",
-            "clear": true,
-            "group": "build"
-         }
-      },
-      {
-         "label": "Build",
-         "dependsOn": [
-            "Server build",
-            "Client watch"
-         ]
-      }
-   ]
+   ],
 }

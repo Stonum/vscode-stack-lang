@@ -1,15 +1,126 @@
 {
-	"name": "stack-lang-client",
-	"description": "VSCode part of a language server",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.69.0"
-	},
-   "dependencies": {
-      "vscode-languageclient": "^9.0.1"
+   "name": "stack-lang",
+   "displayName": "Stack lang",
+   "description": "language server for STACK software package",
+   "version": "0.4.3",
+   "stack": {
+      "serverVersion": "0.4.3"
    },
-	"devDependencies": {
-		"@types/node": "^24.10.0",
-		"@types/vscode": "1.105.0"
-	}
+   "repository": "https://github.com/stonum/vscode-stack-lang",
+   "publisher": "stonum",
+   "categories": [
+      "Programming Languages",
+      "Formatters",
+      "Linters"
+   ],
+   "icon": "images/mark-logo-stack.png",
+   "license": "MIT",
+   "keywords": [
+      "language-server",
+      "stack"
+   ],
+   "engines": {
+      "vscode": "^1.69.0"
+   },
+   "activationEvents": [
+      "onLanguage:stack"
+   ],
+   "main": "./out/extension",
+   "contributes": {
+      "languages": [
+         {
+            "id": "stack",
+            "aliases": [
+               "stack"
+            ],
+            "extensions": [
+               ".prg",
+               ".hdl",
+               ".rpt"
+            ],
+            "firstLine": "^#![Ss][Tt][Aa][Cc][Kk]\\b",
+            "configuration": "./syntaxes/configuration.json"
+         }
+      ],
+      "grammars": [
+         {
+            "language": "stack",
+            "scopeName": "source.stack",
+            "path": "./syntaxes/stack.json"
+         }
+      ],
+      "commands": [
+         {
+            "command": "stack.togglePostgreSQL",
+            "title": "Replaces tildas in the psql query to schema and backward",
+            "category": "stack"
+         },
+         {
+            "command": "stack.fieldsToPostgreSQL",
+            "title": "Replaces [] на \"",
+            "category": "stack"
+         },
+         {
+            "command": "stack.toggleMsSQL",
+            "title": "Replaces tildas in the mssql query to schema and backward",
+            "category": "stack"
+         }
+      ],
+      "keybindings": [
+         {
+            "command": "stack.togglePostgreSQL",
+            "key": "ctrl+shift+r",
+            "mac": "cmd+shift+r",
+            "when": "editorTextFocus"
+         }
+      ],
+      "configuration": {
+         "type": "object",
+         "title": "Stack lang",
+         "properties": {
+            "stack.iniPath": {
+               "title": "Path to INI file",
+               "markdownDescription": "Path to stack.ini file. It used for filter loaded folders.",
+               "default": "",
+               "type:": "string"
+            },
+            "stack.lens.enabled": {
+               "title": "lens",
+               "markdownDescription": "Whether to show CodeLens in Stack files.",
+               "default": true,
+               "type": "boolean"
+            }
+         }
+      },
+      "snippets": [
+         {
+            "language": "stack",
+            "path": "./snippets/snippets.json"
+         }
+      ]
+   },
+   "scripts": {
+      "download-server": "node scripts/download-server.js",
+      "client-compile": "tsc -b",
+      "watch": "rm -rf out && tsc -b -w",
+      "package": "vsce package",
+      "publish": "vsce publish"
+   },
+   "dependencies": {
+      "vscode-languageclient": "9.0.1"
+   },
+   "devDependencies": {
+      "vsce": "^2.15.0",
+      "@types/node": "^24.10.0",
+      "@typescript-eslint/eslint-plugin": "^8.59.1",
+      "@typescript-eslint/parser": "^8.46.0",
+      "@electron/rebuild": "4.0.4",
+      "eslint": "^10.3.0",
+      "glob": "^11.0.3",
+      "ts-loader": "^9.5.4",
+      "typescript": "^5.9.3",
+      "vscode-uri": "^3.0.2",
+      "webpack": "^5.102.1",
+      "webpack-cli": "^6.0.1"
+   }
 }

@@ -1,7 +1,5 @@
-/server/target
-/server/m_lang/examples
-/server/bin
 node_modules
-/client/out
+/out
+/server-bin
 
 *.vsix

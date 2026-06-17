@@ -5,35 +5,17 @@
       {
          "type": "extensionHost",
          "request": "launch",
-         "name": "Launch debug server",
-         "runtimeExecutable": "${execPath}",
-         "args": [
-            "--extensionDevelopmentPath=${workspaceRoot}"
-         ],
-         "outFiles": [
-            "${workspaceRoot}/client/out/**/*.js"
-         ],
-         "preLaunchTask": "Build",
-         "env": {
-            "SERVER_PATH": "${workspaceRoot}/server/target/debug/stack-lang-server",
-            "RUST_BACKTRACE": "full",
-            "RUST_LOG": "trace"
-         }
-      },
-      {
-         "type": "extensionHost",
-         "request": "launch",
          "name": "Launch release server",
          "runtimeExecutable": "${execPath}",
          "args": [
             "--extensionDevelopmentPath=${workspaceRoot}"
          ],
          "outFiles": [
-            "${workspaceRoot}/client/out/**/*.js"
+            "${workspaceRoot}/out/**/*.js"
          ],
          "preLaunchTask": "Client watch",
          "env": {
-            "SERVER_PATH": "${workspaceRoot}/server/target/release/stack-lang-server"
+            "SERVER_PATH": "${workspaceRoot}/server-bin/stack-lang-server-win32-x64.exe"
          }
       }
    ]

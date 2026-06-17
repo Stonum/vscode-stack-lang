@@ -3,11 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  * ------------------------------------------------------------------------------------------ */
 
-import {
-   workspace,
-   window,
-   commands,
-} from "vscode";
+import { workspace, window, commands } from "vscode";
 import * as vscode from "vscode";
 
 import * as path from "path";
@@ -21,7 +17,7 @@ import {
    TransportKind,
 } from "vscode-languageclient/node";
 
-import { togglePostgreSql, fieldsToPostgreSQL, toggleMsSql } from './sqlUtils';
+import { togglePostgreSql, fieldsToPostgreSQL, toggleMsSql } from "./sqlUtils";
 
 let client: LanguageClient;
 let statusBarItem: vscode.StatusBarItem;
@@ -31,14 +27,16 @@ export async function activate(context: vscode.ExtensionContext) {
       process.env.SERVER_PATH ||
       path.join(
          context.extensionPath,
-         "server", "bin",
+         "server-bin",
          process.platform,
-         process.platform === "linux" ? "stack-lang-server" : "stack-lang-server.exe"
+         process.platform === "linux"
+            ? "stack-lang-server-linux-x64"
+            : "stack-lang-server-win32-x64.exe",
       );
-   
+
    // Make the server executable
    if (process.platform == "linux") {
-      await execAsync('chmod +x ' + command);
+      await execAsync("chmod +x " + command);
    }
 
    const run: Executable = {
@@ -58,7 +56,7 @@ export async function activate(context: vscode.ExtensionContext) {
    // If the extension is launched in debug mode then the debug server options are used
    // Otherwise the run options are used
    // Options to control the language client
-   const config = vscode.workspace.getConfiguration('stack');
+   const config = vscode.workspace.getConfiguration("stack");
    let clientOptions: LanguageClientOptions = {
       // Register the server for stack text documents
       documentSelector: [{ scheme: "file", language: "stack" }],
@@ -70,8 +68,8 @@ export async function activate(context: vscode.ExtensionContext) {
          ],
       },
       initializationOptions: {
-         lens_enabled: config.get<boolean>('lens.enabled', false)
-      }
+         lens_enabled: config.get<boolean>("lens.enabled", false),
+      },
    };
 
    // Create the language client and start the client.
@@ -79,14 +77,16 @@ export async function activate(context: vscode.ExtensionContext) {
       "stack-lang-server",
       "stack lang server",
       serverOptions,
-      clientOptions
+      clientOptions,
    );
-   
-   const myCommandId = 'custom/statusBar';
-   // Create a status bar item
-   statusBarItem = window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
-   context.subscriptions.push(statusBarItem);
 
+   const myCommandId = "custom/statusBar";
+   // Create a status bar item
+   statusBarItem = window.createStatusBarItem(
+      vscode.StatusBarAlignment.Left,
+      0,
+   );
+   context.subscriptions.push(statusBarItem);
 
    client.onNotification(myCommandId, (params) => {
       if (params.text != "") {
@@ -103,47 +103,56 @@ export async function activate(context: vscode.ExtensionContext) {
 }
 
 function registerCommands(context: vscode.ExtensionContext) {
-   let togglePSQL = commands.registerCommand('stack.togglePostgreSQL', args => {
-      const activeEditor = vscode.window.activeTextEditor;
-      const path = activeEditor?.document.uri.path;
-      const extension = path?.split('.').pop();
+   let togglePSQL = commands.registerCommand(
+      "stack.togglePostgreSQL",
+      (args) => {
+         const activeEditor = vscode.window.activeTextEditor;
+         const path = activeEditor?.document.uri.path;
+         const extension = path?.split(".").pop();
 
-      const namespace = args?.namespace || 'stack';
-      const dollar = args?.dollar || extension === 'sql' || false;
-      togglePostgreSql(namespace, dollar);
-   });
+         const namespace = args?.namespace || "stack";
+         const dollar = args?.dollar || extension === "sql" || false;
+         togglePostgreSql(namespace, dollar);
+      },
+   );
    context.subscriptions.push(togglePSQL);
 
-   let fieldsToPSQL = commands.registerCommand('stack.fieldsToPostgreSQL', () => {
-      fieldsToPostgreSQL()
-   });
+   let fieldsToPSQL = commands.registerCommand(
+      "stack.fieldsToPostgreSQL",
+      () => {
+         fieldsToPostgreSQL();
+      },
+   );
    context.subscriptions.push(fieldsToPSQL);
 
-   let toggleMsSQL = commands.registerCommand('stack.toggleMsSQL', args => {
+   let toggleMsSQL = commands.registerCommand("stack.toggleMsSQL", (args) => {
       const activeEditor = vscode.window.activeTextEditor;
       const path = activeEditor?.document.uri.path;
-      const extension = path?.split('.').pop();
+      const extension = path?.split(".").pop();
 
-      const namespace = args?.namespace || 'stack';
+      const namespace = args?.namespace || "stack";
       toggleMsSql(namespace);
    });
 
-   let moveToLine = commands.registerCommand('stack.movetoLine', (line: number) => {
-      const editor = window.activeTextEditor;
-      if (!editor) return; // No active editor
+   let moveToLine = commands.registerCommand(
+      "stack.movetoLine",
+      (line: number) => {
+         const editor = window.activeTextEditor;
+         if (!editor) return; // No active editor
 
-      // Create a new position at the start of the line
-      const position = new vscode.Position(line, 0);
+         // Create a new position at the start of the line
+         const position = new vscode.Position(line, 0);
 
-      // Set the selection (collapsed to a single cursor)
-      editor.selection = new vscode.Selection(position, position);
+         // Set the selection (collapsed to a single cursor)
+         editor.selection = new vscode.Selection(position, position);
 
-      // Optionally, reveal the line in the top of the editor
-      editor.revealRange(
-         new vscode.Range(position, position),
-         vscode.TextEditorRevealType.AtTop
-      );
-   });
+         // Optionally, reveal the line in the top of the editor
+         editor.revealRange(
+            new vscode.Range(position, position),
+            vscode.TextEditorRevealType.AtTop,
+         );
+      },
+   );
    context.subscriptions.push(moveToLine);
 }
 
@@ -154,7 +163,7 @@ export function deactivate(): Thenable<void> | undefined {
    return client.stop();
 }
 
-function execAsync (cmd: string) {
+function execAsync(cmd: string) {
    return new Promise((resolve, reject) => {
       exec(cmd, (error, stdout, stderr) => {
          if (error) {
@@ -163,4 +172,4 @@ function execAsync (cmd: string) {
          resolve(stdout);
       });
    });
-};
+}
