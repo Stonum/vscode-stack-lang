@@ -20,6 +20,9 @@ jobs:
          - name: Install dependencies
            run: npm install
 
+         - name: Install vsce (Visual Studio Code Extension Manager)
+           run: npm install -g @vscode/vsce
+
          - name: Download server win32 binaries
            run: npm run download-server win32
            env:
