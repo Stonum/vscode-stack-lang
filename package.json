@@ -107,11 +107,12 @@
       "publish": "vsce publish"
    },
    "dependencies": {
-      "vscode-languageclient": "9.0.1"
+      "vscode-languageclient": "^9.0.1"
    },
    "devDependencies": {
-      "vsce": "^2.15.0",
+      "@vscode/vsce": "3.9.0",
       "@types/node": "^24.10.0",
+      "@types/vscode": "1.105.0",
       "@typescript-eslint/eslint-plugin": "^8.59.1",
       "@typescript-eslint/parser": "^8.46.0",
       "@electron/rebuild": "4.0.4",
