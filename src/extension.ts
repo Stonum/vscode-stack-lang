@@ -28,7 +28,6 @@ export async function activate(context: vscode.ExtensionContext) {
       path.join(
          context.extensionPath,
          "server-bin",
-         process.platform,
          process.platform === "linux"
             ? "stack-lang-server-linux-x64"
             : "stack-lang-server-win32-x64.exe",
