@@ -43,11 +43,11 @@ jobs:
               path: |
                  stack-lang*
 
-         - name: Publish to Visual Studio Code Marketplace
-           run: |
-              vsce publish
-           env:
-              VSCE_PAT: ${{ secrets.VSCE_PAT }}
+         # - name: Publish to Visual Studio Code Marketplace
+         #   run: |
+         #      vsce publish
+         #   env:
+         #      VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
    github-release:
       runs-on: ubuntu-latest
