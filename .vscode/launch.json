@@ -14,9 +14,7 @@
             "${workspaceRoot}/out/**/*.js"
          ],
          "preLaunchTask": "Client watch",
-         "env": {
-            "SERVER_PATH": "${workspaceRoot}/server-bin/stack-lang-server-win32-x64.exe"
-         }
+         "envFile": "${workspaceRoot}/.env",
       }
    ]
 }

@@ -4,17 +4,6 @@
    "version": "2.0.0",
    "tasks": [
       {
-         "label": "Client compile",
-         "type": "npm",
-         "script": "client-compile",
-         "group": "build",
-         "presentation": {
-            "panel": "dedicated",
-            "reveal": "never",
-         },
-         "problemMatcher": ["$tsc"],
-      },
-      {
          "label": "Client watch",
          "type": "npm",
          "script": "watch",
@@ -29,7 +18,9 @@
             "reveal": "never",
             "group": "build",
          },
-         "problemMatcher": ["$tsc-watch"],
-      },
-   ],
+         "problemMatcher": [
+            "$tsc-watch"
+         ],
+      }
+   ]
 }
