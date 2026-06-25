@@ -11,6 +11,9 @@
       "statements": {
          "patterns": [
             {
+               "include": "#tagged-string-template"
+            },
+            {
                "include": "#string"
             },
             {
@@ -285,6 +288,9 @@
       "expression": {
          "name": "meta.expression.stack",
          "patterns": [
+            {
+               "include": "#tagged-string-template"
+            },
             {
                "include": "#string"
             },
@@ -1355,6 +1361,91 @@
             }
          ]
       },
+      "tagged-string-template-substitution": {
+         "name": "meta.template.expression.stack",
+         "begin": "\\$\\{",
+         "beginCaptures": {
+            "0": {
+               "name": "punctuation.definition.template-expression.begin.stack"
+            }
+         },
+         "end": "\\}",
+         "endCaptures": {
+            "0": {
+               "name": "punctuation.definition.template-expression.end.stack"
+            }
+         },
+         "patterns": [
+            {
+               "include": "#string-character-escape"
+            },
+            {
+               "include": "#expression"
+            }
+         ]
+      },
+      "tagged-string-template": {
+         "patterns": [
+            {
+               "include": "#tagged-string-template-double"
+            },
+            {
+               "include": "#tagged-string-template-single"
+            }
+         ]
+      },
+      "tagged-string-template-double": {
+         "name": "string.template.tagged.stack",
+         "begin": "(?<![_$[:alnum:]])((?i:t)|т)(\")",
+         "beginCaptures": {
+            "1": {
+               "name": "storage.type.string.tagged-template.stack"
+            },
+            "2": {
+               "name": "punctuation.definition.string.begin.stack"
+            }
+         },
+         "end": "\"",
+         "endCaptures": {
+            "0": {
+               "name": "punctuation.definition.string.end.stack"
+            }
+         },
+         "patterns": [
+            {
+               "include": "#tagged-string-template-substitution"
+            },
+            {
+               "include": "#string-character-escape"
+            }
+         ]
+      },
+      "tagged-string-template-single": {
+         "name": "string.template.tagged.stack",
+         "begin": "(?<![_$[:alnum:]])((?i:t)|т)(`)",
+         "beginCaptures": {
+            "1": {
+               "name": "storage.type.string.tagged-template.stack"
+            },
+            "2": {
+               "name": "punctuation.definition.string.begin.stack"
+            }
+         },
+         "end": "`",
+         "endCaptures": {
+            "0": {
+               "name": "punctuation.definition.string.end.stack"
+            }
+         },
+         "patterns": [
+            {
+               "include": "#tagged-string-template-substitution"
+            },
+            {
+               "include": "#string-character-escape"
+            }
+         ]
+      },
       "literal": {
          "name": "literal.stack",
          "patterns": [
@@ -1393,6 +1484,9 @@
             }
          },
          "patterns": [
+            {
+               "include": "#string-character-escape"
+            },
             {
                "include": "#expression"
             },
