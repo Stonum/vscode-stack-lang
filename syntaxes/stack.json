@@ -1201,9 +1201,28 @@
                "include": "#string-character-escape"
             },
             {
+               "include": "#string-format-placeholder"
+            },
+            {
                "include": "#sql"
             }
          ]
+      },
+      "string-format-placeholder": {
+         "comment": "плейсхолдер {0} / {имя} внутри строки, например \"строка {0} {х}\".форматировать(...). Не затрагивает ${...} шаблонных строк",
+         "name": "meta.format.placeholder.stack",
+         "match": "(?<!\\$)(\\{)\\s*([0-9]+|[_$[:alpha:]][_$[:alnum:]]*)\\s*(\\})",
+         "captures": {
+            "1": {
+               "name": "punctuation.definition.template-expression.begin.stack"
+            },
+            "2": {
+               "name": "variable.other.readwrite.stack"
+            },
+            "3": {
+               "name": "punctuation.definition.template-expression.end.stack"
+            }
+         }
       },
       "qstring-single": {
          "name": "string.quoted.single.stack",
@@ -1331,6 +1350,9 @@
             },
             {
                "include": "#string-character-escape"
+            },
+            {
+               "include": "#string-format-placeholder"
             },
             {
                "include": "#sql"
