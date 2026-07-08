@@ -1,5 +1,18 @@
 **Changelog**
 ===============
+**v0.5.0 - 2026-07-08**
+------------------------------------
+* **Added**:
+   + diagnostics: flag calls to functions with the wrong number of arguments, empty `if (...);` statements (stray semicolon swallowing the intended body), and stray conditions right after `else` (`else (cond) ...` instead of `else if (cond) ...`)
+   + template string literals via the `t`/`т` prefix, alongside the existing constant literals (`k`/`к`)
+   + smart formatting for chained string-method calls
+   + context-aware call argument breaking when a call is the right-hand side of an assignment
+   + unquoting object keys that are valid identifiers during formatting
+   + compact formatting for simple\short call arguments
+   + string hightlight with {} \ ${} symbols
+* **Fixed**:
+   + empty symbol names (e.g. anonymous members) now render as a single space instead of an empty string, avoiding invalid entries in outline and hover
+
 **v0.4.3 - 2026-06-15**
 ------------------------------------
 * **Fixed**:
