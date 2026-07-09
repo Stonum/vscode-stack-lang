@@ -33,10 +33,10 @@ jobs:
            env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-         - name: Build the extension
-           run: npm run client-compile
+         - name: Check types
+           run: npm run check-types
 
-         - name: Build the extension
+         - name: Package the extension
            run: npm run package
 
          - name: Upload the extension

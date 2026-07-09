@@ -11,7 +11,7 @@
             "--extensionDevelopmentPath=${workspaceRoot}"
          ],
          "outFiles": [
-            "${workspaceRoot}/out/**/*.js"
+            "${workspaceRoot}/dist/**/*.js"
          ],
          "preLaunchTask": "Client watch",
          "envFile": "${workspaceRoot}/.env",
