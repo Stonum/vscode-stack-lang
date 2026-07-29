@@ -23,7 +23,8 @@
       "vscode": "^1.69.0"
    },
    "activationEvents": [
-      "onLanguage:stack"
+      "onLanguage:stack",
+      "onLanguage:sql"
    ],
    "main": "./dist/extension.js",
    "contributes": {
