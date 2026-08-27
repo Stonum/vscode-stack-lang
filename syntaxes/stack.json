@@ -135,7 +135,7 @@
                "include": "#comment"
             },
             {
-               "begin": "((\".+\")|(\\w+))\\s*(:)",
+               "begin": "((\"[^\"]+\")|(\\w+))\\s*(:)",
                "beginCaptures": {
                   "2": {
                      "name": "string.stack"
