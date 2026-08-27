@@ -135,15 +135,18 @@
                "include": "#comment"
             },
             {
-               "begin": "((\"[^\"]+\")|(\\w+))\\s*(:)",
+               "begin": "((\"[^\"]+\")|('[^']+')|(\\w+))\\s*(:)",
                "beginCaptures": {
                   "2": {
-                     "name": "string.stack"
+                     "name": "support.type.property-name.quoted.stack"
                   },
                   "3": {
-                     "name": "variable.object.property.stack"
+                     "name": "support.type.property-name.quoted.stack"
                   },
                   "4": {
+                     "name": "variable.object.property.stack"
+                  },
+                  "5": {
                      "name": "punctuation.destructuring.stack"
                   }
                },
