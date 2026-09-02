@@ -1,5 +1,16 @@
 **Changelog**
 ===============
+**v0.6.1 - 2026-09-02**
+------------------------------------
+* **Added**:
+   + syntax highlighting for mlang array/object destructuring
+   + array/object destructuring assignment (`@[a, b] = arr`, `@{a, b} = obj`, with rest elements and holes) [#7](https://github.com/Stonum/stack-lang/issues/7)
+* **Fixed**:
+   + compact formatting for INSERT VALUES containing named (`:name`) parameters, instead of forcing every value onto its own line
+   + spurious "Internal error" log spam for documents with unrecognized file extensions
+   + workspace symbol index now matches `.hdl`/`.prg` extensions case-insensitively [#24](https://github.com/Stonum/stack-lang/issues/24)
+   + a codegen bug producing double-suffixed token names, and missing `in`/`include`/`в` keyword alternations
+
 **v0.6.0 - 2026-08-31**
 ------------------------------------
 * **Added**:
