@@ -136,6 +136,7 @@ function registerCommands(context: vscode.ExtensionContext) {
       const namespace = args?.namespace || "stack";
       toggleMsSql(namespace);
    });
+   context.subscriptions.push(toggleMsSQL);
 
    let moveToLine = commands.registerCommand(
       "stack.movetoLine",

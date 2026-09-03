@@ -83,7 +83,7 @@
                "title": "Path to INI file",
                "markdownDescription": "Path to stack.ini file. It used for filter loaded folders.",
                "default": "",
-               "type:": "string"
+               "type": "string"
             },
             "stack.lens.enabled": {
                "title": "lens",
