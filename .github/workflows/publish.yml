@@ -23,32 +23,35 @@ jobs:
          - name: Install vsce (Visual Studio Code Extension Manager)
            run: npm install -g @vscode/vsce
 
-         - name: Download server win32 binaries
-           run: npm run download-server win32
-           env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-         - name: Download server linux binaries
-           run: npm run download-server linux
-           env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
          - name: Check types
            run: npm run check-types
 
-         - name: Package the extension
-           run: npm run package
+         - name: Package win32-x64
+           run: |
+              rm -rf server-bin
+              npm run download-server win32
+              vsce package --target win32-x64 -o stack-lang-win32-x64.vsix
+           env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+         - name: Package linux-x64
+           run: |
+              rm -rf server-bin
+              npm run download-server linux
+              vsce package --target linux-x64 -o stack-lang-linux-x64.vsix
+           env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
          - name: Upload the extension
            uses: actions/upload-artifact@v4
            with:
               name: stack-lang
               path: |
-                 stack-lang*
+                 stack-lang*.vsix
 
          - name: Publish to Visual Studio Code Marketplace
            run: |
-              vsce publish
+              vsce publish --packagePath stack-lang-win32-x64.vsix stack-lang-linux-x64.vsix
            env:
               VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
