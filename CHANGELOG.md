@@ -1,5 +1,11 @@
 **Changelog**
 ===============
+**v0.6.2 - 2026-09-03**
+------------------------------------
+* **Added**:
+   + diagnostics: unclosed `{`/`}` now pinpointed at the likely edit site (the opening brace or its header line) instead of collapsing to end-of-file or a distant stray `}`
+   + diagnostics for missing/unbalanced closing parentheses and brackets (`)`, `]`)
+
 **v0.6.1 - 2026-09-02**
 ------------------------------------
 * **Added**:
