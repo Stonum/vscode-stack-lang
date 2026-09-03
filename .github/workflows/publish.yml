@@ -2,9 +2,15 @@ name: Publish VS Code Extension
 
 on:
    workflow_dispatch:
+   push:
+      branches:
+         - main
 
 jobs:
    publish:
+      # runs on manual dispatch, or automatically on a release commit
+      # whose message is exactly `bump version X.Y.Z`
+      if: github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'bump version ')
       runs-on: ubuntu-latest
 
       steps:
