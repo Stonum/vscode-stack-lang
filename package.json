@@ -2,9 +2,9 @@
    "name": "stack-lang",
    "displayName": "Stack lang",
    "description": "language server for STACK software package",
-   "version": "0.5.0",
+   "version": "0.6.2",
    "stack": {
-      "serverVersion": "0.5.0"
+      "serverVersion": "0.6.2"
    },
    "repository": "https://github.com/stonum/vscode-stack-lang",
    "publisher": "stonum",
@@ -23,7 +23,8 @@
       "vscode": "^1.69.0"
    },
    "activationEvents": [
-      "onLanguage:stack"
+      "onLanguage:stack",
+      "onLanguage:sql"
    ],
    "main": "./dist/extension.js",
    "contributes": {
@@ -82,7 +83,7 @@
                "title": "Path to INI file",
                "markdownDescription": "Path to stack.ini file. It used for filter loaded folders.",
                "default": "",
-               "type:": "string"
+               "type": "string"
             },
             "stack.lens.enabled": {
                "title": "lens",
@@ -113,15 +114,15 @@
       "vscode-languageclient": "^9.0.1"
    },
    "devDependencies": {
-      "@vscode/vsce": "^3.9.2",
-      "@types/node": "^24.10.0",
+      "@vscode/vsce": "^3.9.0",
+      "@types/node": "^26.1.2",
       "@types/vscode": "1.69.0",
       "@typescript-eslint/eslint-plugin": "^8.59.1",
       "@typescript-eslint/parser": "^8.46.0",
       "@electron/rebuild": "4.0.4",
       "esbuild": "^0.28.1",
       "eslint": "^10.3.0",
-      "glob": "^11.0.3",
+      "glob": "^13.0.6",
       "typescript": "^5.9.3",
       "vscode-uri": "^3.0.2"
    }

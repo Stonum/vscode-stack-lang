@@ -1,5 +1,32 @@
 **Changelog**
 ===============
+**v0.6.2 - 2026-09-03**
+------------------------------------
+* **Added**:
+   + diagnostics: unclosed `{`/`}` now pinpointed at the likely edit site (the opening brace or its header line) instead of collapsing to end-of-file or a distant stray `}`
+   + diagnostics for missing/unbalanced closing parentheses and brackets (`)`, `]`)
+
+**v0.6.1 - 2026-09-02**
+------------------------------------
+* **Added**:
+   + syntax highlighting for mlang array/object destructuring
+   + array/object destructuring assignment (`@[a, b] = arr`, `@{a, b} = obj`, with rest elements and holes) [#7](https://github.com/Stonum/stack-lang/issues/7)
+* **Fixed**:
+   + compact formatting for INSERT VALUES containing named (`:name`) parameters, instead of forcing every value onto its own line
+   + spurious "Internal error" log spam for documents with unrecognized file extensions
+   + workspace symbol index now matches `.hdl`/`.prg` extensions case-insensitively [#24](https://github.com/Stonum/stack-lang/issues/24)
+   + a codegen bug producing double-suffixed token names, and missing `in`/`include`/`в` keyword alternations
+
+**v0.6.0 - 2026-08-31**
+------------------------------------
+* **Added**:
+   + `.sql` files are now handled by the language server (formatting, diagnostics, psql/mssql conversion commands)
+   + SQL formatting for embedded queries: any string (or string-concatenation) literal whose content actually parses as SQL is now recognized and formatted, no longer gated on the name of the call it's passed to
+   + dialect-aware SQL parsing/formatting covering Postgres and MSSQL syntax
+   + syntax highlighting for object keys and object binding elements
+* **Fixed**:
+   + a range of SQL and mlang formatting edge cases (list wrapping/packing, and/or chain wrapping, comment placement, multiline concatenation, quote conflicts)
+
 **v0.5.0 - 2026-07-08**
 ------------------------------------
 * **Added**:

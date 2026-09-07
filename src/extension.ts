@@ -57,13 +57,17 @@ export async function activate(context: vscode.ExtensionContext) {
    // Options to control the language client
    const config = vscode.workspace.getConfiguration("stack");
    let clientOptions: LanguageClientOptions = {
-      // Register the server for stack text documents
-      documentSelector: [{ scheme: "file", language: "stack" }],
+      // Register the server for stack and sql text documents
+      documentSelector: [
+         { scheme: "file", language: "stack" },
+         { scheme: "file", language: "sql" },
+      ],
       synchronize: {
          // Notify the server about file changes for files contained in the workspace
          fileEvents: [
             workspace.createFileSystemWatcher("**/*.prg"),
             workspace.createFileSystemWatcher("**/*.hdl"),
+            workspace.createFileSystemWatcher("**/*.sql"),
          ],
       },
       initializationOptions: {
@@ -132,6 +136,7 @@ function registerCommands(context: vscode.ExtensionContext) {
       const namespace = args?.namespace || "stack";
       toggleMsSql(namespace);
    });
+   context.subscriptions.push(toggleMsSQL);
 
    let moveToLine = commands.registerCommand(
       "stack.movetoLine",
