@@ -23,6 +23,9 @@
                "include": "#comment"
             },
             {
+               "include": "#destructuring-assignment"
+            },
+            {
                "include": "#literal"
             },
             {
@@ -135,15 +138,18 @@
                "include": "#comment"
             },
             {
-               "begin": "((\".+\")|(\\w+))\\s*(:)",
+               "begin": "((\"[^\"]+\")|('[^']+')|(\\w+))\\s*(:)",
                "beginCaptures": {
                   "2": {
-                     "name": "string.stack"
+                     "name": "support.type.property-name.quoted.stack"
                   },
                   "3": {
-                     "name": "variable.object.property.stack"
+                     "name": "support.type.property-name.quoted.stack"
                   },
                   "4": {
+                     "name": "variable.object.property.stack"
+                  },
+                  "5": {
                      "name": "punctuation.destructuring.stack"
                   }
                },
@@ -251,6 +257,139 @@
          "patterns": [
             {
                "include": "#array-binding-element"
+            }
+         ]
+      },
+      "destructuring-assignment": {
+         "comment": "деструктуризация mlang: @[a,_,c] = expr; и @{a,b:x,...s} = expr;",
+         "patterns": [
+            {
+               "name": "meta.array.destructuring.stack",
+               "begin": "(?<![\\w$.])(@)(?=\\[[^\\[\\]]*\\]\\s*=(?!=))",
+               "beginCaptures": {
+                  "1": {
+                     "name": "keyword.operator.destructuring.stack"
+                  }
+               },
+               "end": "(?<=\\])",
+               "patterns": [
+                  {
+                     "include": "#array-destructuring-pattern"
+                  }
+               ]
+            },
+            {
+               "name": "meta.object.destructuring.stack",
+               "begin": "(?<![\\w$.])(@)(?=\\{[^{}]*\\}\\s*=(?!=))",
+               "beginCaptures": {
+                  "1": {
+                     "name": "keyword.operator.destructuring.stack"
+                  }
+               },
+               "end": "(?<=\\})",
+               "patterns": [
+                  {
+                     "include": "#object-destructuring-pattern"
+                  }
+               ]
+            }
+         ]
+      },
+      "array-destructuring-pattern": {
+         "name": "meta.array-destructuring-pattern.stack",
+         "begin": "\\[",
+         "beginCaptures": {
+            "0": {
+               "name": "punctuation.definition.binding-pattern.array.stack"
+            }
+         },
+         "end": "\\]",
+         "endCaptures": {
+            "0": {
+               "name": "punctuation.definition.binding-pattern.array.stack"
+            }
+         },
+         "patterns": [
+            {
+               "include": "#comment"
+            },
+            {
+               "name": "keyword.operator.rest.stack",
+               "match": "\\.\\.\\."
+            },
+            {
+               "name": "variable.language.destructuring.hole.stack",
+               "match": "(?<![\\w$])_(?![\\w$])"
+            },
+            {
+               "name": "variable.other.readwrite.stack",
+               "match": "[_$[:alpha:]][_$[:alnum:]]*"
+            },
+            {
+               "include": "#punctuation-comma"
+            }
+         ]
+      },
+      "object-destructuring-pattern": {
+         "name": "meta.object-destructuring-pattern.stack",
+         "begin": "\\{",
+         "beginCaptures": {
+            "0": {
+               "name": "punctuation.definition.binding-pattern.object.stack"
+            }
+         },
+         "end": "\\}",
+         "endCaptures": {
+            "0": {
+               "name": "punctuation.definition.binding-pattern.object.stack"
+            }
+         },
+         "patterns": [
+            {
+               "include": "#comment"
+            },
+            {
+               "name": "keyword.operator.rest.stack",
+               "match": "\\.\\.\\."
+            },
+            {
+               "match": "([_$[:alpha:]][_$[:alnum:]]*)\\s*(:)",
+               "captures": {
+                  "1": {
+                     "name": "variable.object.property.stack"
+                  },
+                  "2": {
+                     "name": "punctuation.destructuring.stack"
+                  }
+               }
+            },
+            {
+               "include": "#destructuring-target"
+            },
+            {
+               "include": "#punctuation-comma"
+            }
+         ]
+      },
+      "destructuring-target": {
+         "patterns": [
+            {
+               "include": "#this-literal"
+            },
+            {
+               "match": "(\\.)\\s*([_$[:alpha:]][_$[:alnum:]]*)",
+               "captures": {
+                  "1": {
+                     "name": "punctuation.accessor.stack"
+                  },
+                  "2": {
+                     "name": "variable.other.property.stack"
+                  }
+               }
+            },
+            {
+               "name": "variable.other.readwrite.stack",
+               "match": "[_$[:alpha:]][_$[:alnum:]]*"
             }
          ]
       },
@@ -413,7 +552,7 @@
       },
       "decorator": {
          "name": "meta.decorator.stack",
-         "begin": "(?<!\\.|\\$)\\@",
+         "begin": "(?<!\\.|\\$)\\@(?![\\[{])",
          "beginCaptures": {
             "0": {
                "name": "punctuation.decorator.stack"
@@ -1487,7 +1626,65 @@
                "include": "#null-literal"
             },
             {
+               "include": "#at-object-literal"
+            },
+            {
+               "include": "#at-array-literal"
+            },
+            {
                "include": "#array-literal"
+            }
+         ]
+      },
+      "at-array-literal": {
+         "name": "meta.array.literal.stack",
+         "begin": "(@)(\\[)",
+         "beginCaptures": {
+            "1": {
+               "name": "punctuation.definition.array.begin.stack"
+            },
+            "2": {
+               "name": "meta.brace.square.stack"
+            }
+         },
+         "end": "\\]",
+         "endCaptures": {
+            "0": {
+               "name": "meta.brace.square.stack"
+            }
+         },
+         "patterns": [
+            {
+               "include": "#string-character-escape"
+            },
+            {
+               "include": "#expression"
+            },
+            {
+               "include": "#punctuation-comma"
+            }
+         ]
+      },
+      "at-object-literal": {
+         "name": "meta.object.literal.stack",
+         "begin": "(@)(\\{)",
+         "beginCaptures": {
+            "1": {
+               "name": "punctuation.definition.object.begin.stack"
+            },
+            "2": {
+               "name": "punctuation.definition.block.stack"
+            }
+         },
+         "end": "\\}",
+         "endCaptures": {
+            "0": {
+               "name": "punctuation.definition.block.stack"
+            }
+         },
+         "patterns": [
+            {
+               "include": "#object-member"
             }
          ]
       },
