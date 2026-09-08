@@ -41,6 +41,27 @@
             ],
             "firstLine": "^#![Ss][Tt][Aa][Cc][Kk]\\b",
             "configuration": "./syntaxes/configuration.json"
+         },
+         {
+            "id": "stack-resource",
+            "aliases": [
+               "resource"
+            ],
+            "filenamePatterns": [
+               "*.rx*",
+               "*.RX*"
+            ],
+            "configuration": "./syntaxes/xml-configuration.json"
+         },
+         {
+            "id": "stack-dictionary",
+            "aliases": [
+               "dictionary"
+            ],
+            "extensions": [
+               ".xdic"
+            ],
+            "configuration": "./syntaxes/xml-configuration.json"
          }
       ],
       "grammars": [
@@ -48,6 +69,16 @@
             "language": "stack",
             "scopeName": "source.stack",
             "path": "./syntaxes/stack.json"
+         },
+         {
+            "language": "stack-resource",
+            "scopeName": "source.stack-xml",
+            "path": "./syntaxes/xml-base.tmLanguage.json"
+         },
+         {
+            "language": "stack-dictionary",
+            "scopeName": "source.stack-xml",
+            "path": "./syntaxes/xml-base.tmLanguage.json"
          }
       ],
       "commands": [
@@ -98,7 +129,15 @@
             "language": "stack",
             "path": "./snippets/snippets.json"
          }
-      ]
+      ],
+      "configurationDefaults": {
+         "[stack-resource]": {
+            "editor.tabSize": 3
+         },
+         "[stack-dictionary]": {
+            "editor.tabSize": 4
+         }
+      }
    },
    "scripts": {
       "download-server": "node scripts/download-server.js",

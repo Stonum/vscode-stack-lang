@@ -61,6 +61,8 @@ export async function activate(context: vscode.ExtensionContext) {
       documentSelector: [
          { scheme: "file", language: "stack" },
          { scheme: "file", language: "sql" },
+         { scheme: "file", language: "stack-resource" },
+         { scheme: "file", language: "stack-dictionary" },
       ],
       synchronize: {
          // Notify the server about file changes for files contained in the workspace
@@ -68,6 +70,8 @@ export async function activate(context: vscode.ExtensionContext) {
             workspace.createFileSystemWatcher("**/*.prg"),
             workspace.createFileSystemWatcher("**/*.hdl"),
             workspace.createFileSystemWatcher("**/*.sql"),
+            workspace.createFileSystemWatcher("**/*.rx*"),
+            workspace.createFileSystemWatcher("**/*.xdic"),
          ],
       },
       initializationOptions: {
