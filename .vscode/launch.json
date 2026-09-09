@@ -1,20 +1,19 @@
 // A launch configuration that compiles the extension and then opens it inside a new window
 {
-   "version": "0.2.0",
-   "configurations": [
-      {
-         "type": "extensionHost",
-         "request": "launch",
-         "name": "Launch release server",
-         "runtimeExecutable": "${execPath}",
-         "args": [
-            "--extensionDevelopmentPath=${workspaceRoot}"
-         ],
-         "outFiles": [
-            "${workspaceRoot}/dist/**/*.js"
-         ],
-         "preLaunchTask": "Client watch",
-         "envFile": "${workspaceRoot}/.env",
-      }
-   ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "extensionHost",
+      "request": "launch",
+      "name": "Launch release server",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceRoot}",
+        "--disable-extensions"
+      ],
+      "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+      "preLaunchTask": "Client watch",
+      "envFile": "${workspaceRoot}/.env"
+    }
+  ]
 }
