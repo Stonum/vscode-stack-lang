@@ -24,7 +24,9 @@
    },
    "activationEvents": [
       "onLanguage:stack",
-      "onLanguage:sql"
+      "onLanguage:sql",
+      "onLanguage:stack-resource",
+      "onLanguage:stack-dictionary"
    ],
    "main": "./dist/extension.js",
    "contributes": {
