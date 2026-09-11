@@ -1,5 +1,10 @@
 **Changelog**
 ===============
+**v0.7.0 - 2026-09-11**
+------------------------------------
+* **Added**:
+   + support for `.rx`/`.xdic` (XML) files: syntax highlighting, parsing, formatting, document outline, and lint rules (duplicate attributes, duplicate sibling elements)
+
 **v0.6.2 - 2026-09-03**
 ------------------------------------
 * **Added**:
