@@ -1,5 +1,11 @@
 **Changelog**
 ===============
+**v0.7.1 - 2026-09-11**
+------------------------------------
+* **Fixed**:
+   + embedded SQL formatting now picks a flat vs. wrapped rendering based on the actual available width at print time, instead of always reformatting at the narrower width
+   + call arguments packed onto shared lines (instead of one per line) when the call is the value of an assignment and its arguments are simple
+
 **v0.7.0 - 2026-09-11**
 ------------------------------------
 * **Added**:
