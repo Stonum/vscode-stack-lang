@@ -1106,7 +1106,8 @@
                      },
                      "patterns": [
                         {
-                           "include": "#string"
+                           "match": "\"[^\"]*\"|'[^']*'",
+                           "name": "support.type.property-name.quoted.stack"
                         },
                         {
                            "include": "#array-literal"
@@ -1120,7 +1121,7 @@
             },
             {
                "name": "meta.object.member.stack",
-               "begin": "(?x)(?:([_$[:alpha:]][_$[:alnum:]]*)\\s*(:)(?=\\s*( (async\\s+)|(function\\s*[(<])|(function\\s+)| ([_$[:alpha:]][_$[:alnum:]]*\\s*=>)| ((<([^<>]|\\<[^<>]+\\>)+>\\s*)?\\(([^()]|\\([^()]*\\))*\\)(\\s*:\\s*(.)*)?\\s*=>))))",
+               "begin": "(?x)(?:((?:[_$[:alpha:]][_$[:alnum:]]*)|(?:[0-9]+))\\s*(:)(?=\\s*( (async\\s+)|(function\\s*[(<])|(function\\s+)| ([_$[:alpha:]][_$[:alnum:]]*\\s*=>)| ((<([^<>]|\\<[^<>]+\\>)+>\\s*)?\\(([^()]|\\([^()]*\\))*\\)(\\s*:\\s*(.)*)?\\s*=>))))",
                "beginCaptures": {
                   "0": {
                      "name": "meta.object-literal.key.stack"
@@ -1141,7 +1142,7 @@
             },
             {
                "name": "meta.object.member.stack",
-               "begin": "(?:[_$[:alpha:]][_$[:alnum:]]*)\\s*(:)",
+               "begin": "(?:(?:[_$[:alpha:]][_$[:alnum:]]*)|(?:[0-9]+))\\s*(:)",
                "beginCaptures": {
                   "0": {
                      "name": "meta.object-literal.key.stack"
