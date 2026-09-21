@@ -1,5 +1,13 @@
 **Changelog**
 ===============
+**v0.7.2 - 2026-09-21**
+------------------------------------
+* **Added**:
+   + warning on calls to functions, classes and methods marked `@deprecated`
+* **Fixed**:
+   + highlighting of numeric and quoted keys in object literals
+   + report (`.rpt`) parsing no longer drops the rest of the file after a malformed section; recovery skips ahead to the next report
+
 **v0.7.1 - 2026-09-11**
 ------------------------------------
 * **Fixed**:
