@@ -133,6 +133,9 @@
          }
       ],
       "configurationDefaults": {
+         "[stack]": {
+            "editor.wordBasedSuggestions": "matchingDocuments"
+         },
          "[stack-resource]": {
             "editor.tabSize": 3
          },
