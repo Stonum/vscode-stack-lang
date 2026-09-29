@@ -13,6 +13,8 @@ import {
    Executable,
    LanguageClient,
    LanguageClientOptions,
+   Location,
+   Position,
    ServerOptions,
    TransportKind,
 } from "vscode-languageclient/node";
@@ -162,6 +164,23 @@ function registerCommands(context: vscode.ExtensionContext) {
       },
    );
    context.subscriptions.push(moveToLine);
+
+   // server sends plain LSP json, the built-in command needs vscode types:
+   // one location opens directly, several open a peek list
+   let goToLocations = commands.registerCommand(
+      "stack.goToLocations",
+      (uri: string, position: Position, locations: Location[]) => {
+         const converter = client.protocol2CodeConverter;
+         return commands.executeCommand(
+            "editor.action.goToLocations",
+            converter.asUri(uri),
+            converter.asPosition(position),
+            locations.map((location) => converter.asLocation(location)),
+            locations.length === 1 ? "goto" : "peek",
+         );
+      },
+   );
+   context.subscriptions.push(goToLocations);
 }
 
 export function deactivate(): Thenable<void> | undefined {
