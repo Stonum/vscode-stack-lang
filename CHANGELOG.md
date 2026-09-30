@@ -1,5 +1,19 @@
 **Changelog**
 ===============
+**v0.8.0 - 2026-09-30**
+------------------------------------
+* **Added**:
+   + navigation between `.rx` resources and `.hdl`/`.prg` handlers: go to definition, find references, hover and code lenses for selects, API browsers and their handler functions
+   + go to definition and hover for mlang functions called from API browser expressions in `.rx` files
+* **Fixed**:
+   + word-based suggestions restored for stack files by default (VS Code 1.138 turned them off when an inline completion provider is active)
+* **Performance**:
+   + open documents share their semantic model with the workspace index instead of being re-parsed on every change
+   + lint runs in a single pass with the core index built once and the project index updated per file; diagnostics are published outside the document lock and superseded versions are skipped
+   + embedded SQL detection no longer builds a syntax tree and skips subtrees without SQL keywords
+   + faster semantic tokens (line index built once, only the requested range is walked) and code lenses (resource links indexed by name)
+   + workspace folders and ini path are taken from `initialize`; open documents are refreshed after workspace warm-up
+
 **v0.7.2 - 2026-09-21**
 ------------------------------------
 * **Added**:
