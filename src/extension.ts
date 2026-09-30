@@ -78,6 +78,7 @@ export async function activate(context: vscode.ExtensionContext) {
       },
       initializationOptions: {
          lens_enabled: config.get<boolean>("lens.enabled", false),
+         ini_path: config.get<string>("iniPath", ""),
       },
    };
 
