@@ -1,5 +1,12 @@
 **Changelog**
 ===============
+**v0.8.1 - 2026-10-05**
+------------------------------------
+* **Fixed**:
+   + server crash (infinite recursion) when a variable is assigned from a call of its own member
+   + false "wrong number of arguments" warning for calls with spread arguments
+   + spurious hover on handler event labels in `.hdl` files
+
 **v0.8.0 - 2026-09-30**
 ------------------------------------
 * **Added**:
