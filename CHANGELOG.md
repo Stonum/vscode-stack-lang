@@ -1,5 +1,10 @@
 **Changelog**
 ===============
+**v0.8.3 - 2026-10-23**
+------------------------------------
+* **Fixed**:
+   + extension icon resized to meet Marketplace requirements
+
 **v0.8.2 - 2026-10-23**
 ------------------------------------
 * **Added**:
