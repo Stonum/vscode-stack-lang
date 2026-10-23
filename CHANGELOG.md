@@ -1,5 +1,12 @@
 **Changelog**
 ===============
+**v0.8.2 - 2026-10-23**
+------------------------------------
+* **Added**:
+   + SQL: parsing and formatting of DDL statements and PL/pgSQL bodies (`DO`, `CREATE FUNCTION`), more Postgres syntax
+* **Fixed**:
+   + SQL: error recovery, `.sql` formatting in the LSP and various line wrapping issues
+
 **v0.8.1 - 2026-10-05**
 ------------------------------------
 * **Fixed**:
