@@ -1,5 +1,11 @@
 **Changelog**
 ===============
+**v0.8.4 - 2026-11-17**
+------------------------------------
+* **Fixed**:
+   + mlang: restore spaces after commas between constructor parameters
+   + mlang: prevent embedded SQL and multiline strings in call arguments, arrays and object members from accumulating extra indentation on repeated formatting
+
 **v0.8.3 - 2026-10-23**
 ------------------------------------
 * **Fixed**:
